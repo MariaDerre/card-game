@@ -72,7 +72,6 @@ body {
     border: 1px solid rgb(0, 73, 128);
 }
 .start_btn{
-    /* Старт */
     width: 246px;
     height: 48px;
     background-color: #7ac100;
@@ -85,4 +84,96 @@ body {
     outline: none;
     border-radius: 12px;
     margin-top: 67px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.display{
+    color: rgb(255, 255, 255);
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 72px;
+    text-align: left;
+}
+.label{
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 32px;
+    text-align: left;
+}
+.time_text{
+    display: flex;
+    gap: 57px;
+    padding-left: 35px;
+}
+.stopwatch{
+    padding-left: 22px;
+}
+.restart{
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    text-align: center;
+    border: none; 
+    outline: none;
+    border-radius: 12px;
+    background-color: #7ac100;
+    width: 246px;
+    height: 48px;
+    margin-top: 52px;
+    margin-right: 23px;
+}
+.img_win{
+    width: 96px;
+    height: 96px;
+    padding-top: 30px;
+}
+.text_win{
+    color: rgb(0, 73, 128);
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 48px;
+    height: 48px;
+    margin: 0 0 0 0;
+    padding-top: 5px;
+    padding-bottom: 28px;
+}
+.text_spendTime{
+    color: rgb(0, 0, 0);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    height: 32px;
+    width: 230px;
+    margin: 0 0 0 0;
+}
+.spendTime{
+    color: rgb(0, 0, 0);
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 72px;
+    margin: 0 0 0 0;
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+.restart-again{
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    text-align: center;
+    border: none; 
+    outline: none;
+    border-radius: 12px;
+    background-color: #7ac100;
+    width: 246px;
+    height: 48px;
+}
+.modal-content-win{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

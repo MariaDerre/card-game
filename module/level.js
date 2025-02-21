@@ -1,23 +1,33 @@
+import { appElement, renderChooseLevelModal } from "../main.js";
+
 export function renderLevel () {
-    const levelOne = `
-    <div class="stopwatch">
-        <div class="display" id="display">00:00</div>
-        <div class="labels">
-            <span class="label">мин</span>
-            <span class="label">сек</span>
+    const level = `
+    <div class='header'>
+        <div class="stopwatch">
+            <div class="time_text">
+                <span class="label">min</span>
+                <span class="label">sek</span>
+            </div>
+            <div class="display" id="display">00:00</div>
         </div>
+        <button class='restart'>Начать заново</button>
     </div>
     `
+
+appElement.innerHTML = level;
+
 let timer;
 let seconds = 0;
 let isRunning = true; // Начинаем с запущенного состояния
 
+const restartBtn = document.querySelector(".restart");
+restartBtn.addEventListener('click', () => {
+    renderChooseLevelModal({ appEl: appElement })
+}) 
+
 const display = document.getElementById('display');
 
-// Запускаем таймер автоматически при загрузке страницы
-window.onload = () => {
-    startTimer();
-};
+startTimer();
 
 function startTimer() {
     timer = setInterval(() => {

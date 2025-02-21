@@ -1,6 +1,8 @@
-const appElement = document.querySelector('.app');
+import { renderLevel } from "./module/level.js";
 
-function renderChooseLevelModal({ appEl }) {
+export const appElement = document.querySelector('.app');
+
+export function renderChooseLevelModal({ appEl }) {
     const modalHtml = `
         <div id="modal" class="modal">
             <div class="modal-content">
@@ -40,6 +42,7 @@ function renderChooseLevelModal({ appEl }) {
         if (selectedLevel) {
             alert(`Вы выбрали уровень сложности: ${selectedLevel.value}`);
             modal.style.display = "none"; // Закрываем модальное окно
+            renderLevel()
         } else {
             alert('Пожалуйста, выберите уровень сложности.');
         }
