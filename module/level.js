@@ -1,6 +1,6 @@
 import { appElement, renderChooseLevelModal } from "../main.js";
 
-export function renderLevel () {
+export function renderLevel() {
     const level = `
     <div class='header'>
         <div class="stopwatch">
@@ -12,32 +12,32 @@ export function renderLevel () {
         </div>
         <button class='restart'>Начать заново</button>
     </div>
-    `
+    `;
 
-appElement.innerHTML = level;
+    appElement.innerHTML = level;
 
-let timer;
-let seconds = 0;
-let isRunning = true; // Начинаем с запущенного состояния
+    let timer;
+    let seconds = 0;
+    let isRunning = true; // Начинаем с запущенного состояния
 
-const restartBtn = document.querySelector(".restart");
-restartBtn.addEventListener('click', () => {
-    renderChooseLevelModal({ appEl: appElement })
-}) 
+    const restartBtn = document.querySelector(".restart");
+    restartBtn.addEventListener("click", () => {
+        renderChooseLevelModal({ appEl: appElement });
+    });
 
-const display = document.getElementById('display');
+    const display = document.getElementById("display");
 
-startTimer();
+    startTimer();
 
-function startTimer() {
-    timer = setInterval(() => {
-        seconds++;
-        updateDisplay();
-    }, 1000);
-}
-function updateDisplay() {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    display.textContent = `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-}    
+    function startTimer() {
+        timer = setInterval(() => {
+            seconds++;
+            updateDisplay();
+        }, 1000);
+    }
+    function updateDisplay() {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = seconds % 60;
+        display.textContent = `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
+    }
 }

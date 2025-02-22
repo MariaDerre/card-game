@@ -11,9 +11,9 @@ export function winRendor() {
                 <button class="restart restart-again">Начать заново</button>
             </div>
         </div>
-    `
+    `;
     const restartBtn = document.querySelector(".restart");
-    restartBtn.addEventListener('click', () => {
-        renderChooseLevelModal({ appEl: appElement })
-    }) 
+    restartBtn.addEventListener("click", () => {
+        renderChooseLevelModal({ appEl: appElement });
+    });
 }

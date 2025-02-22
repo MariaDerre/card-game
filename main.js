@@ -50,3 +50,19 @@ export function renderChooseLevelModal({ appEl }) {
 }
  
 renderChooseLevelModal({ appEl: appElement });
+
+//активная кнопка
+document.querySelectorAll('.radio_button').forEach(radio => {
+    radio.addEventListener('change', () => {
+        // Удаляем класс выделения у всех меток
+        document.querySelectorAll('.radio-toolbar label').forEach(label => {
+            label.classList.remove('active');
+        });
+
+        // Добавляем класс выделения к метке, связанной с нажатой радиокнопкой
+        if (radio.checked) {
+            const label = document.querySelector(`label[for="${radio.id}"]`);
+            label.classList.add('active');
+        }
+    });
+});

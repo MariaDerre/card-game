@@ -71,6 +71,10 @@ body {
     background-color: #ffffff;
     border: 1px solid rgb(0, 73, 128);
 }
+.radio-toolbar label.active {
+    border: 1px solid rgb(185, 22, 90);
+    transform: scale(0.95);
+}
 .start_btn{
     width: 246px;
     height: 48px;
