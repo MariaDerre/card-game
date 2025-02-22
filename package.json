@@ -1,5 +1,8 @@
 {
   "devDependencies": {
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
     "prettier": "^3.5.2"
   },
   "name": "card-game",
@@ -7,7 +10,8 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write ./module/"
+    "format": "prettier --write ./module/",
+    "lint:js": "eslint ./module/**/*.js"
   },
   "repository": {
     "type": "git",
