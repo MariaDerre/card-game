@@ -1,47 +1,51 @@
 @font-face {
-    font-family: "StratosSkyeng";
-    src: url(fonts/stratosskyengweb-regular.woff), format("woff");
-    src: url(fonts/stratosskyengweb-regular.woff2), format("woff2");
-  }
-
+    font-family: StratosSkyeng;
+    src: url("fonts/stratosskyengweb-regular.woff"), format("woff");
+    src: url("fonts/stratosskyengweb-regular.woff2"), format("woff2");
+}
 body {
     margin: 0;
-    background-color:rgb(0, 73, 128);
-    font-family: "StratosSkyeng";
+    background-color: rgb (0, 73, 128);
+    font-family: StratosSkyeng;
 }
 .modal {
     position: fixed;
-    top: 50%; 
-    left: 50%; 
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 .modal-content {
-    background: rgb(194, 245, 255);
+    background: rgb(194 245 255);
     width: 480px;
     height: 459px;
     border-radius: 12px;
 }
-.level-text{
-    color: rgb(0, 73, 128);
+
+.level-text {
+    color: rgb(0 73 128);
     font-size: 40px;
     font-weight: 400;
     line-height: 48px;
     text-align: center;
     width: 208px;
 }
-.level_checkbox{
+
+.level_checkbox {
     margin-top: 48px;
 }
-.level{
+
+.level {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.radio-toolbar{
+
+.radio-toolbar {
     display: flex;
     align-items: center;
     gap: 26px;
 }
+
 .radio_button {
     background-color: white;
     text-align: center;
@@ -49,12 +53,13 @@ body {
     height: 98px;
     border: 1px solid red;
 }
+
 .radio-toolbar input[type="radio"] {
     display: none;
 }
 
 .radio-toolbar label {
-    color: rgb(0, 128, 193);
+    color: rgb(0 128 193);
     font-size: 64px;
     font-weight: 400;
     line-height: 72px;
@@ -67,61 +72,70 @@ body {
     justify-content: center;
     border-radius: 12px;
 }
+
 .radio-toolbar label:hover {
-    background-color: #ffffff;
-    border: 1px solid rgb(0, 73, 128);
+    background-color: #fff;
+    border: 1px solid rgb(0 73 128);
 }
+
 .radio-toolbar label.active {
-    border: 1px solid rgb(185, 22, 90);
+    border: 1px solid rgb(185 22 90);
     transform: scale(0.95);
 }
-.start_btn{
+
+.start_btn {
     width: 246px;
     height: 48px;
     background-color: #7ac100;
-    color: rgb(255, 255, 255);
+    color: rgb(255 255 255);
     font-size: 24px;
     font-weight: 400;
     line-height: 32px;
     text-align: center;
-    border: none; 
+    border: none;
     outline: none;
     border-radius: 12px;
     margin-top: 67px;
 }
-.header{
+
+.header {
     display: flex;
     justify-content: space-between;
 }
-.display{
-    color: rgb(255, 255, 255);
+
+.display {
+    color: rgb(255 255 255);
     font-size: 64px;
     font-weight: 400;
     line-height: 72px;
     text-align: left;
 }
-.label{
-    color: rgb(255, 255, 255);
+
+.label {
+    color: rgb(255 255 255);
     font-size: 16px;
     font-weight: 400;
     line-height: 32px;
     text-align: left;
 }
-.time_text{
+
+.time_text {
     display: flex;
     gap: 57px;
     padding-left: 35px;
 }
-.stopwatch{
+
+.stopwatch {
     padding-left: 22px;
 }
-.restart{
-    color: rgb(255, 255, 255);
+
+.restart {
+    color: rgb(255 255 255);
     font-size: 24px;
     font-weight: 400;
     line-height: 32px;
     text-align: center;
-    border: none; 
+    border: none;
     outline: none;
     border-radius: 12px;
     background-color: #7ac100;
@@ -130,53 +144,59 @@ body {
     margin-top: 52px;
     margin-right: 23px;
 }
-.img_win{
+
+.img_win {
     width: 96px;
     height: 96px;
     padding-top: 30px;
 }
-.text_win{
-    color: rgb(0, 73, 128);
+
+.text_win {
+    color: rgb(0 73 128);
     font-size: 40px;
     font-weight: 400;
     line-height: 48px;
     height: 48px;
-    margin: 0 0 0 0;
+    margin: 0;
     padding-top: 5px;
     padding-bottom: 28px;
 }
-.text_spendTime{
-    color: rgb(0, 0, 0);
+
+.text_spendTime {
+    color: rgb(0 0 0);
     font-size: 24px;
     font-weight: 400;
     line-height: 32px;
     height: 32px;
     width: 230px;
-    margin: 0 0 0 0;
+    margin: 0;
 }
-.spendTime{
-    color: rgb(0, 0, 0);
+
+.spendTime {
+    color: rgb(0 0 0);
     font-size: 64px;
     font-weight: 400;
     line-height: 72px;
-    margin: 0 0 0 0;
+    margin: 0;
     padding-top: 10px;
     padding-bottom: 40px;
 }
-.restart-again{
-    color: rgb(255, 255, 255);
+
+.restart-again {
+    color: rgb(255 255 255);
     font-size: 24px;
     font-weight: 400;
     line-height: 32px;
     text-align: center;
-    border: none; 
+    border: none;
     outline: none;
     border-radius: 12px;
     background-color: #7ac100;
     width: 246px;
     height: 48px;
 }
-.modal-content-win{
+
+.modal-content-win {
     display: flex;
     flex-direction: column;
     align-items: center;
