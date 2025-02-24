@@ -1,4 +1,4 @@
-import { renderChooseLevelModal } from "../main.js";
+import { renderChooseLevelModal, appElement } from "../main.js";
 
 export function winRendor() {
     const modalWinHtml = `

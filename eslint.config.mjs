@@ -19,14 +19,16 @@ export default [
         plugins: {
             prettier,
         },
-
         languageOptions: {
+            parserOptions: {
+                sourceType: "module",
+            },
             globals: {
                 ...globals.browser,
                 ...globals.node,
             },
             ecmaVersion: 2020,
-            sourceType: "commonjs",
+            sourceType: "module",
         },
         rules: {
             "prettier/prettier": "error",

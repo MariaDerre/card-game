@@ -1,6 +1,6 @@
 import { renderLevel } from "./module/level.js";
 
-export const appElement = document.querySelector('.app');
+export const appElement = document.querySelector(".app");
 
 export function renderChooseLevelModal({ appEl }) {
     const modalHtml = `
@@ -38,31 +38,33 @@ export function renderChooseLevelModal({ appEl }) {
 
     // Обрабатываем нажатие на кнопку "Старт"
     startButton.addEventListener("click", () => {
-        const selectedLevel = document.querySelector('input[name="level"]:checked');
+        const selectedLevel = document.querySelector(
+            'input[name="level"]:checked',
+        );
         if (selectedLevel) {
             alert(`Вы выбрали уровень сложности: ${selectedLevel.value}`);
             modal.style.display = "none"; // Закрываем модальное окно
-            renderLevel()
+            renderLevel();
         } else {
-            alert('Пожалуйста, выберите уровень сложности.');
+            alert("Пожалуйста, выберите уровень сложности.");
         }
     });
 }
- 
+
 renderChooseLevelModal({ appEl: appElement });
 
 //активная кнопка
-document.querySelectorAll('.radio_button').forEach(radio => {
-    radio.addEventListener('change', () => {
+document.querySelectorAll(".radio_button").forEach((radio) => {
+    radio.addEventListener("change", () => {
         // Удаляем класс выделения у всех меток
-        document.querySelectorAll('.radio-toolbar label').forEach(label => {
-            label.classList.remove('active');
+        document.querySelectorAll(".radio-toolbar label").forEach((label) => {
+            label.classList.remove("active");
         });
 
         // Добавляем класс выделения к метке, связанной с нажатой радиокнопкой
         if (radio.checked) {
             const label = document.querySelector(`label[for="${radio.id}"]`);
-            label.classList.add('active');
+            label.classList.add("active");
         }
     });
 });

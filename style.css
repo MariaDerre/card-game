@@ -1,19 +1,23 @@
 @font-face {
     font-family: StratosSkyeng;
-    src: url("fonts/stratosskyengweb-regular.woff"), format("woff");
-    src: url("fonts/stratosskyengweb-regular.woff2"), format("woff2");
+    src:
+        url("./fonts/stratosskyengweb-regular.woff") format("woff"),
+        url("./fonts/stratosskyengweb-regular.woff2") format("woff2");
 }
+
 body {
     margin: 0;
-    background-color: rgb (0, 73, 128);
-    font-family: StratosSkyeng;
+    background-color: rgb(0 73 128);
+    font-family: StratosSkyeng, sans-serif;
 }
+
 .modal {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .modal-content {
     background: rgb(194 245 255);
     width: 480px;

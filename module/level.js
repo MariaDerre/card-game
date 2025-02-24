@@ -16,9 +16,7 @@ export function renderLevel() {
 
     appElement.innerHTML = level;
 
-    let timer;
     let seconds = 0;
-    let isRunning = true; // Начинаем с запущенного состояния
 
     const restartBtn = document.querySelector(".restart");
     restartBtn.addEventListener("click", () => {
@@ -30,6 +28,7 @@ export function renderLevel() {
     startTimer();
 
     function startTimer() {
+        let timer;
         timer = setInterval(() => {
             seconds++;
             updateDisplay();
