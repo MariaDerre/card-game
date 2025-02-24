@@ -15,7 +15,8 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "prettier --write ./module/",
         "lint:js": "eslint ./module/**/*.js",
-        "lint:css": "stylelint **/*.css"
+        "lint:css": "stylelint **/*.css",
+        "prepare": "husky"
     },
     "repository": {
         "type": "git",
