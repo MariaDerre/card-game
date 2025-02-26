@@ -1,4 +1,4 @@
-import { renderPlayingFields } from "./module/playing-field.js";
+import { renderPlayingFields } from "../module/playing-field.js";
 
 export const appElement = document.querySelector(".app");
 export let selectedLevel;

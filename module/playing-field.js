@@ -1,4 +1,8 @@
-import { appElement, renderChooseLevelModal, selectedLevel } from "../main.js";
+import {
+    appElement,
+    renderChooseLevelModal,
+    selectedLevel,
+} from "../src/main.js";
 
 export function renderPlayingFields() {
     let level = selectedLevel.value;
