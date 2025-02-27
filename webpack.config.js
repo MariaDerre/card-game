@@ -27,7 +27,7 @@ module.export = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: "static", to: "static" }],
+            patterns: [{ from: "cards", to: "cards" }],
         }),
         new HtmlWebpackPlugin({
             template: "index.html",
