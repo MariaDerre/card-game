@@ -3,13 +3,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const mode =
     process.env.NODE_ENV === "production" ? "production" : "development";
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
-module.export = {
+module.exports = {
     entry: "./src/main.js",
     mode,
     module: {
         rules: [
-            { test: /\.css$/, use: ["style-loader", "css-loader"] },
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: "asset/resource",
@@ -32,5 +37,10 @@ module.export = {
         new HtmlWebpackPlugin({
             template: "index.html",
         }),
+        new MiniCssExtractPlugin(),
     ],
+    optimization: {
+        minimizer: ["...", new CssMinimizerPlugin()],
+    },
+    devtool: process.env.NODE_ENV === "production" ? false : "source-map",
 };

@@ -1,8 +1,8 @@
 @font-face {
     font-family: StratosSkyeng;
     src:
-        url("./fonts/stratosskyengweb-regular.woff") format("woff"),
-        url("./fonts/stratosskyengweb-regular.woff2") format("woff2");
+        url("../fonts/stratosskyengweb-regular.woff") format("woff"),
+        url("../fonts/stratosskyengweb-regular.woff2") format("woff2");
 }
 
 body {
@@ -212,7 +212,7 @@ body {
     height: 121px;
     border-radius: 4px;
     background: rgb(228 251 255);
-    background-image: url("img/shirt.png");
+    background-image: url("../cards/shirt.png");
 }
 
 .cards {
