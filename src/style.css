@@ -222,3 +222,7 @@ body {
     padding-left: 29px;
     justify-items: center;
 }
+
+.card.flipped img {
+    display: block;
+}
