@@ -12,31 +12,31 @@ let seconds = 0;
 let timer;
 
 function generateCards() {
-    const suits = ["пики", "червы", "бубны", "трефы"]; // Масти
-    const ranks = ["туз", "2", "3", "4", "5", "6", "7", "дама", "король"]; // Ранги
+    const suits = ["черви", "пики", "бубны", "крести"];
+    const ranks = ["туз", "король", "дама", "валет", "10", "9", "8", "7", "6"];
     const cards = [];
 
     suits.forEach((suit) => {
         ranks.forEach((rank) => {
-            cards.push(`img/cards/${rank} ${suit}.png`); // Создание пути к изображению
+            cards.push(`cards/${rank} ${suit}.png`); // Создание пути к изображению
         });
     });
-
     return cards;
 }
+
 const cardsArray = generateCards();
+
 export function renderPlayingFields() {
-    const cardArr = [];
     let numCards;
 
     switch (selectedLevel) {
-        case 1:
+        case "1":
             numCards = 6;
             break;
-        case 2:
+        case "2":
             numCards = 12;
             break;
-        case 3:
+        case "3":
             numCards = 18;
             break;
         default:
@@ -44,17 +44,11 @@ export function renderPlayingFields() {
             break;
     }
 
-    const gameCards = [
-        ...cardsArray.slice(0, numCards / 2),
-        ...cardsArray.slice(0, numCards / 2),
-    ];
-    shuffleArray(gameCards); // Перемешивание карт
+    const gameCards = shuffleArray([...cardsArray]).slice(0, numCards);
+    const duplicatedCards = [...gameCards, ...gameCards]; // Дублируем карты для игры
+    shuffleArray(duplicatedCards); // Перемешиваем дублированные карты
 
-    gameCards.forEach((value) => {
-        cardArr.push(
-            `<div class="card" data-value="${value}" style="background-image: url('../cards/shirt.png');"></div>`,
-        );
-    });
+    console.log(duplicatedCards);
 
     const appHtml = `
         <div class='header'>
@@ -68,7 +62,18 @@ export function renderPlayingFields() {
             <button class='restart'>Начать заново</button>
         </div>
         <div class="cards">
-        ${cardArr.join(" ")}
+         ${duplicatedCards
+             .map(
+                 (card) => `
+                <div class="card" data-value="${card}">
+                    <div class="card-inner">
+                        <div class="card-front" style="background-image: url(${card});"></div>
+                        <div class="card-back" style="background-image: url('../cards/shirt.png');"></div>
+                    </div>
+                </div>
+            `,
+             )
+             .join("")}
         </div>
         `;
     appElement.innerHTML = appHtml;
@@ -76,19 +81,23 @@ export function renderPlayingFields() {
     const restartBtn = document.querySelector(".restart");
     const display = document.getElementById("display");
 
-    startGame();
+    startGame(duplicatedCards);
     startTimer();
 
     restartBtn.addEventListener("click", () => {
         renderChooseLevelModal({ appEl: appElement });
     });
 
-    // Показываем карточки 5 секунд, потом скрываем их
+    // Сначала показываем лицевые стороны
+    const allCards = document.querySelectorAll(".card-inner");
+    allCards.forEach((cardInner) => {
+        cardInner.classList.remove("flipped"); // Убираем класс переворота
+    });
+
+    // Ждем 5 секунд и переворачиваем карты
     setTimeout(() => {
-        const allCards = document.querySelectorAll(".card");
-        allCards.forEach((card) => {
-            card.style.backgroundImage = ""; // Скрываем изображение
-            card.classList.remove("flipped"); // Убираем класс переворота
+        allCards.forEach((cardInner) => {
+            cardInner.classList.add("flipped"); // Добавляем класс для переворота
         });
     }, 5000);
 
@@ -108,11 +117,23 @@ export function renderPlayingFields() {
         const gameFields = document.querySelector(".cards"); // Получаем поле
         gameFields.innerHTML = ""; // Очищаем поле
 
-        gameCards.forEach((value) => {
+        duplicatedCards.forEach((value) => {
             const card = document.createElement("div");
             card.classList.add("card");
-            card.dataset.value = value; // Исправлено: теперь dataset.value это путь к изображению
-            card.style.backgroundImage = `url("../cards/shirt.png")`; // Устанавливаем рубашку изображения
+            card.dataset.value = value;
+
+            const cardInner = document.createElement("div");
+            cardInner.classList.add("card-inner");
+            const cardFront = document.createElement("div");
+            cardFront.classList.add("card-front");
+            cardFront.style.backgroundImage = `url(${value})`;
+            const cardBack = document.createElement("div");
+            cardBack.classList.add("card-back");
+
+            cardInner.appendChild(cardFront);
+            cardInner.appendChild(cardBack);
+            card.appendChild(cardInner);
+
             card.addEventListener("click", flipCard);
             gameFields.appendChild(card);
         });
@@ -120,19 +141,23 @@ export function renderPlayingFields() {
     //перемешиваем массив карт
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
+            const j = Math.floor(Math.random() * (i + 1)); // Генерируем случайный индекс
+            [array[i], array[j]] = [array[j], array[i]]; // Меняем местами элементы
         }
+        return array;
     }
 
     function flipCard(event) {
         if (lockBoard) return;
-        if (!event.target.classList.contains("card")) return; // Проверяем, что кликнули именно по карточке
-        const clickedCard = event.target;
+        const clickedCard = event.currentTarget;
+
+        // Получаем внутреннюю часть карты
+        const cardInner = clickedCard.querySelector(".card-inner");
+
         if (clickedCard === firstCard) return;
 
-        clickedCard.classList.add("flipped");
-        clickedCard.style.backgroundImage = `url(${clickedCard.dataset.value})`; // Показываем изображение
+        cardInner.classList.add("flipped");
+        clickedCard.style.pointerEvents = "none";
 
         if (!firstCard) {
             firstCard = clickedCard;
@@ -163,11 +188,8 @@ export function renderPlayingFields() {
 
     function unflipCards() {
         setTimeout(() => {
-            firstCard.style.backgroundImage = `url("../cards/shirt.png")`; // Скрываем изображение
-            secondCard.style.backgroundImage = `url("../cards/shirt.png")`; // Скрываем изображение
-            firstCard.classList.remove("flipped");
-            secondCard.classList.remove("flipped");
-
+            firstCard.querySelector(".card-inner").classList.remove("flipped"); // Скрываем изображение
+            secondCard.querySelector(".card-inner").classList.remove("flipped");
             resetBoard();
         }, 1000);
     }
@@ -178,7 +200,7 @@ export function renderPlayingFields() {
     }
     function checkWin() {
         const flippedCards = document.querySelectorAll(".card.flipped");
-        if (flippedCards.length === selectedLevel) {
+        if (flippedCards.length === selectedLevel * 2) {
             clearInterval(timer); // Останавливаем таймер
             winRendor();
             resetGame();

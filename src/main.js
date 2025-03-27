@@ -2,6 +2,7 @@ import { renderPlayingFields } from "../module/playing-field.js";
 import "./style.css";
 
 export const appElement = document.querySelector(".app");
+
 export let selectedLevel;
 
 export function renderChooseLevelModal({ appEl }) {
