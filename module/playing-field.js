@@ -18,7 +18,7 @@ function generateCards() {
 
     suits.forEach((suit) => {
         ranks.forEach((rank) => {
-            cards.push(`cards/${rank} ${suit}.png`); // Создание пути к изображению
+            cards.push(`cards/${rank}%20${suit}.png`); // Создание пути к изображению
         });
     });
     return cards;
@@ -47,8 +47,6 @@ export function renderPlayingFields() {
     const gameCards = shuffleArray([...cardsArray]).slice(0, numCards);
     const duplicatedCards = [...gameCards, ...gameCards]; // Дублируем карты для игры
     shuffleArray(duplicatedCards); // Перемешиваем дублированные карты
-
-    console.log(duplicatedCards);
 
     const appHtml = `
         <div class='header'>
@@ -151,13 +149,9 @@ export function renderPlayingFields() {
         if (lockBoard) return;
         const clickedCard = event.currentTarget;
 
-        // Получаем внутреннюю часть карты
-        const cardInner = clickedCard.querySelector(".card-inner");
-
         if (clickedCard === firstCard) return;
 
-        cardInner.classList.add("flipped");
-        clickedCard.style.pointerEvents = "none";
+        clickedCard.querySelector(".card-inner").classList.add("flipped");
 
         if (!firstCard) {
             firstCard = clickedCard;
@@ -188,7 +182,7 @@ export function renderPlayingFields() {
 
     function unflipCards() {
         setTimeout(() => {
-            firstCard.querySelector(".card-inner").classList.remove("flipped"); // Скрываем изображение
+            firstCard.querySelector(".card-inner").classList.remove("flipped");
             secondCard.querySelector(".card-inner").classList.remove("flipped");
             resetBoard();
         }, 1000);
@@ -213,6 +207,7 @@ export function renderPlayingFields() {
         firstCard = null;
         secondCard = null;
         lockBoard = false;
+
         startGame();
         startTimer();
     }

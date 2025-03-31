@@ -245,3 +245,7 @@ body {
     background-image: url("../cards/shirt.png");
     transform: rotateY(180deg);
 }
+
+.card-front {
+    background-size: cover;
+}
