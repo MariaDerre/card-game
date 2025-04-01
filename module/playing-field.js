@@ -80,22 +80,21 @@ export function renderPlayingFields() {
     const display = document.getElementById("display");
 
     startGame(duplicatedCards);
+    console.log(duplicatedCards);
     startTimer();
 
     restartBtn.addEventListener("click", () => {
         renderChooseLevelModal({ appEl: appElement });
     });
 
-    // Сначала показываем лицевые стороны
     const allCards = document.querySelectorAll(".card-inner");
     allCards.forEach((cardInner) => {
-        cardInner.classList.remove("flipped"); // Убираем класс переворота
+        cardInner.classList.remove("flipped");
     });
 
-    // Ждем 5 секунд и переворачиваем карты
     setTimeout(() => {
         allCards.forEach((cardInner) => {
-            cardInner.classList.add("flipped"); // Добавляем класс для переворота
+            cardInner.classList.add("flipped");
         });
     }, 5000);
 
@@ -139,8 +138,8 @@ export function renderPlayingFields() {
     //перемешиваем массив карт
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1)); // Генерируем случайный индекс
-            [array[i], array[j]] = [array[j], array[i]]; // Меняем местами элементы
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
     }
@@ -173,17 +172,22 @@ export function renderPlayingFields() {
     }
 
     function disableCards() {
+        firstCard.querySelector(".card-inner").classList.remove("flipped");
+        secondCard.querySelector(".card-inner").classList.remove("flipped");
         firstCard.removeEventListener("click", flipCard);
         secondCard.removeEventListener("click", flipCard);
-
-        resetBoard();
-        checkWin(); // Проверяем, выиграл ли игрок
+        setTimeout(() => {
+            checkWin();
+            resetBoard();
+        }, 1000);
     }
 
     function unflipCards() {
+        firstCard.querySelector(".card-inner").classList.remove("flipped");
+        secondCard.querySelector(".card-inner").classList.remove("flipped");
         setTimeout(() => {
-            firstCard.querySelector(".card-inner").classList.remove("flipped");
-            secondCard.querySelector(".card-inner").classList.remove("flipped");
+            firstCard.querySelector(".card-inner").classList.add("flipped");
+            secondCard.querySelector(".card-inner").classList.add("flipped");
             resetBoard();
         }, 1000);
     }
@@ -193,22 +197,21 @@ export function renderPlayingFields() {
         lockBoard = false;
     }
     function checkWin() {
-        const flippedCards = document.querySelectorAll(".card.flipped");
-        if (flippedCards.length === selectedLevel * 2) {
-            clearInterval(timer); // Останавливаем таймер
-            winRendor();
-            resetGame();
+        const flippedCards = document.querySelectorAll(".card-inner.flipped");
+        if (flippedCards.length === 0) {
+            clearInterval(timer);
+            // winRendor();
+            alert("Вы победили");
         }
     }
-    function resetGame() {
-        clearInterval(timer);
-        seconds = 0;
-        updateDisplay();
-        firstCard = null;
-        secondCard = null;
-        lockBoard = false;
+    // function resetGame() {
+    //     clearInterval(timer);
+    //     seconds = 0;
+    //     updateDisplay();
+    //     firstCard = null;
+    //     secondCard = null;
+    //     lockBoard = false;
 
-        startGame();
-        startTimer();
-    }
+    //     startGame();
+    // }
 }
