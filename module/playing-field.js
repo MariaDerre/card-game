@@ -150,7 +150,7 @@ export function renderPlayingFields() {
 
         if (clickedCard === firstCard) return;
 
-        clickedCard.querySelector(".card-inner").classList.add("flipped");
+        clickedCard.querySelector(".card-inner").classList.remove("flipped");
 
         if (!firstCard) {
             firstCard = clickedCard;
@@ -188,7 +188,9 @@ export function renderPlayingFields() {
         setTimeout(() => {
             firstCard.querySelector(".card-inner").classList.add("flipped");
             secondCard.querySelector(".card-inner").classList.add("flipped");
-            resetBoard();
+            clearInterval(timer);
+            alert("Вы проиграли!");
+            lockBoard = true;
         }, 1000);
     }
 
