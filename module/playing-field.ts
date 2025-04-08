@@ -2,7 +2,7 @@ import {
     appElement,
     renderChooseLevelModal,
     selectedLevel,
-} from "../src/main.js";
+} from "../src/main";
 import { winRendor } from "./win";
 import { loseRendor } from "./lose";
 

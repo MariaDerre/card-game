@@ -1,4 +1,4 @@
-import { renderChooseLevelModal, appElement } from "../src/main.js";
+import { renderChooseLevelModal, appElement } from "../src/main";
 
 export function loseRendor(timeSpent: number) {
     const minutes = Math.floor(timeSpent / 60);

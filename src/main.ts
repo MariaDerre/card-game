@@ -1,4 +1,4 @@
-import { renderPlayingFields } from "../module/playing-field.js";
+import { renderPlayingFields } from "../module/playing-field";
 import "./style.css";
 
 export const appElement: HTMLElement | null = document.querySelector(".app");
