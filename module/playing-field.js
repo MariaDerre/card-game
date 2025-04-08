@@ -4,6 +4,7 @@ import {
     selectedLevel,
 } from "../src/main.js";
 import { winRendor } from "../module/win.js";
+import { loseRendor } from "./lose.js";
 
 let firstCard = null;
 let secondCard = null;
@@ -189,8 +190,8 @@ export function renderPlayingFields() {
             firstCard.querySelector(".card-inner").classList.add("flipped");
             secondCard.querySelector(".card-inner").classList.add("flipped");
             clearInterval(timer);
-            alert("Вы проиграли!");
             lockBoard = true;
+            loseRendor(seconds, startGame);
         }, 1000);
     }
 
@@ -202,7 +203,7 @@ export function renderPlayingFields() {
         const flippedCards = document.querySelectorAll(".card-inner.flipped");
         if (flippedCards.length === 0) {
             clearInterval(timer);
-            // winRendor();
+            winRendor(seconds);
             alert("Вы победили");
         }
     }
