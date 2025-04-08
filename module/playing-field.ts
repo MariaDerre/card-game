@@ -3,19 +3,19 @@ import {
     renderChooseLevelModal,
     selectedLevel,
 } from "../src/main.js";
-import { winRendor } from "../module/win.js";
-import { loseRendor } from "./lose.js";
+import { winRendor } from "./win";
+import { loseRendor } from "./lose";
 
-let firstCard = null;
-let secondCard = null;
-let lockBoard = false;
-let seconds = 0;
-let timer;
+let firstCard: HTMLElement | null = null;
+let secondCard: HTMLElement | null = null;
+let lockBoard: boolean = false;
+let seconds: number = 0;
+let timer: NodeJS.Timeout;
 
 function generateCards() {
-    const suits = ["черви", "пики", "бубны", "крести"];
-    const ranks = ["туз", "король", "дама", "валет", "10", "9", "8", "7", "6"];
-    const cards = [];
+    const suits: string[] = ["черви", "пики", "бубны", "крести"];
+    const ranks: string[] = ["туз", "король", "дама", "валет", "10", "9", "8", "7", "6"];
+    const cards: string[] = [];
 
     suits.forEach((suit) => {
         ranks.forEach((rank) => {
@@ -28,6 +28,10 @@ function generateCards() {
 const cardsArray = generateCards();
 
 export function renderPlayingFields() {
+    if (!appElement) {
+        console.error("Элемент appEl не найден.");
+        return; // Выход из функции, если элемент не найден
+    }
     let numCards;
 
     switch (selectedLevel) {
@@ -46,7 +50,7 @@ export function renderPlayingFields() {
     }
 
     const gameCards = shuffleArray([...cardsArray]).slice(0, numCards);
-    const duplicatedCards = [...gameCards, ...gameCards]; // Дублируем карты для игры
+    const duplicatedCards: string[] = [...gameCards, ...gameCards]; // Дублируем карты для игры
     shuffleArray(duplicatedCards); // Перемешиваем дублированные карты
 
     const appHtml = `
@@ -77,15 +81,18 @@ export function renderPlayingFields() {
         `;
     appElement.innerHTML = appHtml;
 
-    const restartBtn = document.querySelector(".restart");
-    const display = document.getElementById("display");
+    const restartBtn = document.querySelector(".restart") as HTMLButtonElement;
+    const display = document.getElementById("display") as HTMLElement;
 
     startGame(duplicatedCards);
-    console.log(duplicatedCards);
     startTimer();
 
     restartBtn.addEventListener("click", () => {
-        renderChooseLevelModal({ appEl: appElement });
+        if (appElement) {
+            renderChooseLevelModal({ appEl: appElement });
+        } else {
+            console.error("Элемент с классом 'app' не найден.");
+        }
     });
 
     const allCards = document.querySelectorAll(".card-inner");
@@ -111,8 +118,8 @@ export function renderPlayingFields() {
         display.textContent = `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
     }
 
-    function startGame() {
-        const gameFields = document.querySelector(".cards"); // Получаем поле
+    function startGame(duplicatedCards: string[]): void {
+        const gameFields = document.querySelector(".cards") as HTMLElement; // Получаем поле
         gameFields.innerHTML = ""; // Очищаем поле
 
         duplicatedCards.forEach((value) => {
@@ -137,7 +144,7 @@ export function renderPlayingFields() {
         });
     }
     //перемешиваем массив карт
-    function shuffleArray(array) {
+    function shuffleArray<T>(array: T[]): T[] {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -145,13 +152,13 @@ export function renderPlayingFields() {
         return array;
     }
 
-    function flipCard(event) {
+    function flipCard(event: MouseEvent): void {
         if (lockBoard) return;
-        const clickedCard = event.currentTarget;
+        const clickedCard = event.currentTarget as HTMLElement;
 
         if (clickedCard === firstCard) return;
 
-        clickedCard.querySelector(".card-inner").classList.remove("flipped");
+        clickedCard.querySelector(".card-inner")?.classList.remove("flipped");
 
         if (!firstCard) {
             firstCard = clickedCard;
@@ -164,34 +171,34 @@ export function renderPlayingFields() {
         checkForMatch();
     }
 
-    function checkForMatch() {
-        if (firstCard.dataset.value === secondCard.dataset.value) {
+    function checkForMatch(): void {
+        if (firstCard && secondCard && firstCard.dataset.value === secondCard.dataset.value) {
             disableCards();
         } else {
             unflipCards();
         }
     }
 
-    function disableCards() {
-        firstCard.querySelector(".card-inner").classList.remove("flipped");
-        secondCard.querySelector(".card-inner").classList.remove("flipped");
-        firstCard.removeEventListener("click", flipCard);
-        secondCard.removeEventListener("click", flipCard);
+    function disableCards(): void {
+        firstCard?.querySelector(".card-inner")?.classList.remove("flipped");
+        secondCard?.querySelector(".card-inner")?.classList.remove("flipped");
+        if (firstCard) firstCard.removeEventListener("click", flipCard);
+        if (secondCard) secondCard.removeEventListener("click", flipCard);
         setTimeout(() => {
             checkWin();
             resetBoard();
         }, 1000);
     }
 
-    function unflipCards() {
-        firstCard.querySelector(".card-inner").classList.remove("flipped");
-        secondCard.querySelector(".card-inner").classList.remove("flipped");
+    function unflipCards(): void {
+        firstCard?.querySelector(".card-inner")?.classList.remove("flipped");
+        secondCard?.querySelector(".card-inner")?.classList.remove("flipped");
         setTimeout(() => {
-            firstCard.querySelector(".card-inner").classList.add("flipped");
-            secondCard.querySelector(".card-inner").classList.add("flipped");
+            firstCard?.querySelector(".card-inner")?.classList.add("flipped");
+            secondCard?.querySelector(".card-inner")?.classList.add("flipped");
             clearInterval(timer);
             lockBoard = true;
-            loseRendor(seconds, startGame);
+            loseRendor(seconds);
         }, 1000);
     }
 
@@ -204,17 +211,6 @@ export function renderPlayingFields() {
         if (flippedCards.length === 0) {
             clearInterval(timer);
             winRendor(seconds);
-            alert("Вы победили");
         }
     }
-    // function resetGame() {
-    //     clearInterval(timer);
-    //     seconds = 0;
-    //     updateDisplay();
-    //     firstCard = null;
-    //     secondCard = null;
-    //     lockBoard = false;
-
-    //     startGame();
-    // }
 }

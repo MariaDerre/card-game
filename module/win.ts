@@ -1,10 +1,13 @@
 import { renderChooseLevelModal, appElement } from "../src/main.js";
 
-export function winRendor(timeSpent) {
+export function winRendor(timeSpent: number) {
     const minutes = Math.floor(timeSpent / 60);
     const remainingSeconds = timeSpent % 60;
     const formattedTime = `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
-
+    if (!appElement) {
+        console.error("Элемент appEl не найден.");
+        return; // Выход из функции, если элемент не найден
+    }
     const modalWinHtml = `
         <div id="modal" class="modal">
             <div class="modal-content modal-content-win">
@@ -29,8 +32,12 @@ export function winRendor(timeSpent) {
     `;
     appElement.innerHTML += modalWinHtml;
 
-    const restartBtn = document.querySelector(".restart-again");
+    const restartBtn = document.querySelector(".restart-again") as HTMLButtonElement;
     restartBtn.addEventListener("click", () => {
-        renderChooseLevelModal({ appEl: appElement });
+        if (appElement) {
+            renderChooseLevelModal({ appEl: appElement });
+        } else {
+            console.error("Элемент с классом 'app' не найден.");
+        }
     });
 }

@@ -1,11 +1,18 @@
 import { renderPlayingFields } from "../module/playing-field.js";
 import "./style.css";
 
-export const appElement = document.querySelector(".app");
+export const appElement: HTMLElement | null = document.querySelector(".app");
 
-export let selectedLevel;
+export let selectedLevel: string | null;
+interface RenderChooseLevelModalProps {
+    appEl: HTMLElement;
+}
 
-export function renderChooseLevelModal({ appEl }) {
+export function renderChooseLevelModal({ appEl }:RenderChooseLevelModalProps): void  {
+    if (!appEl) {
+        console.error("Элемент appEl не найден.");
+        return; // Выход из функции, если элемент не найден
+    }
     const modalHtml = `
         <div id="modal" class="modal">
             <div class="modal-content">
@@ -33,8 +40,8 @@ export function renderChooseLevelModal({ appEl }) {
 
     appEl.innerHTML = modalHtml;
 
-    const modal = document.getElementById("modal");
-    const startButton = document.querySelector(".start_btn");
+    const modal = document.getElementById("modal") as HTMLElement;
+    const startButton = document.querySelector(".start_btn") as HTMLButtonElement;
 
     // Открываем модальное окно
     modal.style.display = "block";
@@ -43,7 +50,7 @@ export function renderChooseLevelModal({ appEl }) {
     startButton.addEventListener("click", () => {
         const levelInput = document.querySelector(
             'input[name="level"]:checked',
-        );
+        ) as HTMLInputElement | null;
         if (levelInput) {
             selectedLevel = levelInput.value;
             alert(`Вы выбрали уровень сложности: ${selectedLevel}`);
@@ -54,24 +61,26 @@ export function renderChooseLevelModal({ appEl }) {
         }
     });
     //активная кнопка
-    document.querySelectorAll(".radio_button").forEach((radio) => {
+    document.querySelectorAll<HTMLInputElement>(".radio_button").forEach((radio) => { 
         radio.addEventListener("change", () => {
-            // Удаляем класс выделения у всех меток
             document
                 .querySelectorAll(".radio-toolbar label")
                 .forEach((label) => {
                     label.classList.remove("active");
                 });
 
-            // Добавляем класс выделения к метке, связанной с нажатой радиокнопкой
             if (radio.checked) {
                 const label = document.querySelector(
                     `label[for="${radio.id}"]`,
-                );
+                ) as HTMLInputElement;
                 label.classList.add("active");
             }
         });
     });
 }
 
-renderChooseLevelModal({ appEl: appElement });
+if (appElement) {
+    renderChooseLevelModal({ appEl: appElement });
+} else {
+    console.error("Элемент с классом 'app' не найден.");
+}
