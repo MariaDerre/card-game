@@ -6,7 +6,7 @@ export function loseRendor(appElement: HTMLElement, timeSpent: number) {
     const formattedTime = `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
     if (!appElement) {
         console.error("Элемент appEl не найден.");
-        return; // Выход из функции, если элемент не найден
+        return;
     }
     const modalLoseHtml = `
         <div id="modal" class="modal">

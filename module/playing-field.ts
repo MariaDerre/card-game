@@ -25,7 +25,7 @@ function generateCards() {
 
     suits.forEach((suit) => {
         ranks.forEach((rank) => {
-            cards.push(`cards/${rank}%20${suit}.png`); // Создание пути к изображению
+            cards.push(`cards/${rank}%20${suit}.png`);
         });
     });
     return cards;
@@ -36,7 +36,7 @@ const cardsArray = generateCards();
 export function renderPlayingFields() {
     if (!appElement) {
         console.error("Элемент appEl не найден.");
-        return; // Выход из функции, если элемент не найден
+        return;
     }
     let numCards;
 

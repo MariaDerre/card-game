@@ -12,7 +12,7 @@ interface RenderChooseLevelModalProps {
 export function renderChooseLevelModal({ appEl }:RenderChooseLevelModalProps): void  {
     if (!appEl) {
         console.error("Элемент appEl не найден.");
-        return; // Выход из функции, если элемент не найден
+        return;
     }
     const modalHtml = `
         <div id="modal" class="modal">
