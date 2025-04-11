@@ -1,6 +1,6 @@
 import { renderChooseLevelModal, appElement } from "../src/main";
 
-export function loseRendor(timeSpent: number) {
+export function loseRendor(appElement: HTMLElement, timeSpent: number) {
     const minutes = Math.floor(timeSpent / 60);
     const remainingSeconds = timeSpent % 60;
     const formattedTime = `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;

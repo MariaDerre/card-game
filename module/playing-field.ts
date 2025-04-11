@@ -1,8 +1,4 @@
-import {
-    appElement,
-    renderChooseLevelModal,
-    selectedLevel,
-} from "../src/main";
+import { appElement, renderChooseLevelModal, selectedLevel } from "../src/main";
 import { winRendor } from "./win";
 import { loseRendor } from "./lose";
 
@@ -14,7 +10,17 @@ let timer: NodeJS.Timeout;
 
 function generateCards() {
     const suits: string[] = ["черви", "пики", "бубны", "крести"];
-    const ranks: string[] = ["туз", "король", "дама", "валет", "10", "9", "8", "7", "6"];
+    const ranks: string[] = [
+        "туз",
+        "король",
+        "дама",
+        "валет",
+        "10",
+        "9",
+        "8",
+        "7",
+        "6",
+    ];
     const cards: string[] = [];
 
     suits.forEach((suit) => {
@@ -172,7 +178,11 @@ export function renderPlayingFields() {
     }
 
     function checkForMatch(): void {
-        if (firstCard && secondCard && firstCard.dataset.value === secondCard.dataset.value) {
+        if (
+            firstCard &&
+            secondCard &&
+            firstCard.dataset.value === secondCard.dataset.value
+        ) {
             disableCards();
         } else {
             unflipCards();
@@ -198,7 +208,11 @@ export function renderPlayingFields() {
             secondCard?.querySelector(".card-inner")?.classList.add("flipped");
             clearInterval(timer);
             lockBoard = true;
-            loseRendor(seconds);
+            if (appElement) {
+                loseRendor(appElement, seconds); // Теперь мы уверены, что appElement не null
+            } else {
+                console.error("Элемент с классом 'app' не найден.");
+            }
         }, 1000);
     }
 

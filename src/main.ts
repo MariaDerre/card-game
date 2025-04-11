@@ -3,6 +3,7 @@ import "./style.css";
 
 export const appElement: HTMLElement | null = document.querySelector(".app");
 
+
 export let selectedLevel: string | null;
 interface RenderChooseLevelModalProps {
     appEl: HTMLElement;
