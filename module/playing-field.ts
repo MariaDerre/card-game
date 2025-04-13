@@ -8,7 +8,7 @@ let lockBoard: boolean = false;
 let seconds: number = 0;
 let timer: NodeJS.Timeout;
 
-function generateCards() {
+export function generateCards() {
     const suits: string[] = ["черви", "пики", "бубны", "крести"];
     const ranks: string[] = [
         "туз",
@@ -38,6 +38,7 @@ export function renderPlayingFields() {
         console.error("Элемент appEl не найден.");
         return;
     }
+    
     let numCards;
 
     switch (selectedLevel) {

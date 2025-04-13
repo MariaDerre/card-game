@@ -82,6 +82,4 @@ export function renderChooseLevelModal({ appEl }:RenderChooseLevelModalProps): v
 
 if (appElement) {
     renderChooseLevelModal({ appEl: appElement });
-} else {
-    console.error("Элемент с классом 'app' не найден.");
-}
+};
