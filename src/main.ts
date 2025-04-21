@@ -3,13 +3,14 @@ import "./style.css";
 
 export const appElement: HTMLElement | null = document.querySelector(".app");
 
-
 export let selectedLevel: string | null;
 interface RenderChooseLevelModalProps {
     appEl: HTMLElement;
 }
 
-export function renderChooseLevelModal({ appEl }:RenderChooseLevelModalProps): void  {
+export function renderChooseLevelModal({
+    appEl,
+}: RenderChooseLevelModalProps): void {
     if (!appEl) {
         console.error("Элемент appEl не найден.");
         return;
@@ -42,7 +43,9 @@ export function renderChooseLevelModal({ appEl }:RenderChooseLevelModalProps): v
     appEl.innerHTML = modalHtml;
 
     const modal = document.getElementById("modal") as HTMLElement;
-    const startButton = document.querySelector(".start_btn") as HTMLButtonElement;
+    const startButton = document.querySelector(
+        ".start_btn",
+    ) as HTMLButtonElement;
 
     // Открываем модальное окно
     modal.style.display = "block";
@@ -62,24 +65,26 @@ export function renderChooseLevelModal({ appEl }:RenderChooseLevelModalProps): v
         }
     });
     //активная кнопка
-    document.querySelectorAll<HTMLInputElement>(".radio_button").forEach((radio) => { 
-        radio.addEventListener("change", () => {
-            document
-                .querySelectorAll(".radio-toolbar label")
-                .forEach((label) => {
-                    label.classList.remove("active");
-                });
+    document
+        .querySelectorAll<HTMLInputElement>(".radio_button")
+        .forEach((radio) => {
+            radio.addEventListener("change", () => {
+                document
+                    .querySelectorAll(".radio-toolbar label")
+                    .forEach((label) => {
+                        label.classList.remove("active");
+                    });
 
-            if (radio.checked) {
-                const label = document.querySelector(
-                    `label[for="${radio.id}"]`,
-                ) as HTMLInputElement;
-                label.classList.add("active");
-            }
+                if (radio.checked) {
+                    const label = document.querySelector(
+                        `label[for="${radio.id}"]`,
+                    ) as HTMLInputElement;
+                    label.classList.add("active");
+                }
+            });
         });
-    });
 }
 
 if (appElement) {
     renderChooseLevelModal({ appEl: appElement });
-};
+}

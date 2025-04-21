@@ -38,18 +38,18 @@ export function renderPlayingFields() {
         console.error("Элемент appEl не найден.");
         return;
     }
-    
+
     let numCards;
 
     switch (selectedLevel) {
         case "1":
-            numCards = 6;
+            numCards = 3;
             break;
         case "2":
-            numCards = 12;
+            numCards = 6;
             break;
         case "3":
-            numCards = 18;
+            numCards = 9;
             break;
         default:
             numCards = 0;
@@ -106,11 +106,12 @@ export function renderPlayingFields() {
     allCards.forEach((cardInner) => {
         cardInner.classList.remove("flipped");
     });
-
+    lockBoard = true;
     setTimeout(() => {
         allCards.forEach((cardInner) => {
             cardInner.classList.add("flipped");
         });
+        lockBoard = false;
     }, 5000);
 
     function startTimer() {
