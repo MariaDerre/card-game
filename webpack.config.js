@@ -40,7 +40,10 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: "cards", to: "cards" }],
+            patterns: [
+                { from: "cards", to: "cards" },
+                { from: "img", to: "img" },
+            ],
         }),
         new HtmlWebpackPlugin({
             template: "index.html",
