@@ -11,7 +11,7 @@ export function winRendor(timeSpent: number) {
     const modalWinHtml = `
         <div id="modal" class="modal">
             <div class="modal-content modal-content-win">
-                <img class="img_win" src="dist/img/win.png">
+                <img class="img_win" src="img/win.png">
                 <p class="text_win">Вы выиграли!</p>
                 <p class="text_spendTime">Затраченное время:</p>
                 <p class="spendTime">${formattedTime}</p>

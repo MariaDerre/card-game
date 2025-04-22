@@ -57,7 +57,6 @@ export function renderChooseLevelModal({
         ) as HTMLInputElement | null;
         if (levelInput) {
             selectedLevel = levelInput.value;
-            alert(`Вы выбрали уровень сложности: ${selectedLevel}`);
             modal.style.display = "none";
             renderPlayingFields();
         } else {
