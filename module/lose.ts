@@ -11,7 +11,7 @@ export function loseRendor(appElement: HTMLElement, timeSpent: number) {
     const modalLoseHtml = `
         <div id="modal" class="modal">
             <div class="modal-content modal-content-win">
-                <img class="img_win" src="dist/cards/lose.png">
+                <img class="img_win" src="img/lose.png">
                 <p class="text_win">Вы проиграли!</p>
                 <p class="text_spendTime">Затраченное время:</p>
                 <p class="spendTime">${formattedTime}</p>
