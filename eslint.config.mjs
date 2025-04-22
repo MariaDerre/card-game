@@ -1,9 +1,9 @@
 import prettier from "eslint-plugin-prettier";
-import globals, { jest } from "globals";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import js from "@eslint/js";
 import { FlatCompat } from "@eslint/eslintrc";
+import globals from "globals";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,7 +18,6 @@ export default [
     {
         plugins: {
             prettier,
-            jest,
         },
         languageOptions: {
             parserOptions: {
@@ -27,6 +26,12 @@ export default [
             globals: {
                 ...globals.browser,
                 ...globals.node,
+                jest: true,
+                test: true,
+                describe: true,
+                expect: true,
+                it: true,
+                beforeEach: true,
             },
             ecmaVersion: 2020,
             sourceType: "module",

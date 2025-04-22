@@ -39,12 +39,13 @@
     "scripts": {
         "test": "jest",
         "format": "prettier --write ./module/",
-        "lint:js": "eslint ./module/**/*.js",
         "lint:css": "stylelint **/*.css",
         "prepare": "husky && husky install",
         "build": "cross-env NODE_ENV=production webpack",
         "start": "webpack-dev-server --open",
-        "lint:ts": "tsc --noEmit"
+        "lint:ts": "tsc --noEmit",
+        "type-check": "tsc --noEmit",
+        "lint": "npm run lint:css && npm run lint:ts"
     },
     "repository": {
         "type": "git",

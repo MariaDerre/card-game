@@ -38,18 +38,18 @@ export function renderPlayingFields() {
         console.error("Элемент appEl не найден.");
         return;
     }
-    
+
     let numCards;
 
     switch (selectedLevel) {
         case "1":
-            numCards = 6;
+            numCards = 3;
             break;
         case "2":
-            numCards = 12;
+            numCards = 6;
             break;
         case "3":
-            numCards = 18;
+            numCards = 9;
             break;
         default:
             numCards = 0;
@@ -106,11 +106,12 @@ export function renderPlayingFields() {
     allCards.forEach((cardInner) => {
         cardInner.classList.remove("flipped");
     });
-
+    lockBoard = true;
     setTimeout(() => {
         allCards.forEach((cardInner) => {
             cardInner.classList.add("flipped");
         });
+        lockBoard = false;
     }, 5000);
 
     function startTimer() {
@@ -126,6 +127,13 @@ export function renderPlayingFields() {
     }
 
     function startGame(duplicatedCards: string[]): void {
+        seconds = 0; 
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+        clearInterval(timer);
+        updateDisplay();
+
         const gameFields = document.querySelector(".cards") as HTMLElement; // Получаем поле
         gameFields.innerHTML = ""; // Очищаем поле
 
@@ -210,7 +218,7 @@ export function renderPlayingFields() {
             clearInterval(timer);
             lockBoard = true;
             if (appElement) {
-                loseRendor(appElement, seconds); // Теперь мы уверены, что appElement не null
+                loseRendor(appElement, seconds);
             } else {
                 console.error("Элемент с классом 'app' не найден.");
             }

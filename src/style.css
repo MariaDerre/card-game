@@ -157,7 +157,8 @@ body {
 .img_win {
     width: 96px;
     height: 96px;
-    padding-top: 30px;
+    margin-top: 30px;
+    background: #0000;
 }
 
 .text_win {
