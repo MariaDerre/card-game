@@ -127,6 +127,13 @@ export function renderPlayingFields() {
     }
 
     function startGame(duplicatedCards: string[]): void {
+        seconds = 0; 
+        firstCard = null;
+        secondCard = null;
+        lockBoard = false;
+        clearInterval(timer);
+        updateDisplay();
+
         const gameFields = document.querySelector(".cards") as HTMLElement; // Получаем поле
         gameFields.innerHTML = ""; // Очищаем поле
 
@@ -211,7 +218,7 @@ export function renderPlayingFields() {
             clearInterval(timer);
             lockBoard = true;
             if (appElement) {
-                loseRendor(appElement, seconds); // Теперь мы уверены, что appElement не null
+                loseRendor(appElement, seconds);
             } else {
                 console.error("Элемент с классом 'app' не найден.");
             }
